@@ -108,7 +108,7 @@ MinButton.Text = "_"
 MinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinButton.Font = Enum.Font.GothamBold
 MinButton.TextSize = 16
-MinButton.Parent = Window.ScreenGui.MainFrame
+MinButton.Parent = MainFrame
 
 local minimized = false
 MinButton.MouseButton1Click:Connect(function()
