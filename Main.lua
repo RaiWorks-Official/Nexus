@@ -5,8 +5,8 @@ local HttpService = game:GetService("HttpService")
 
 local Themes = {
 	Dark = {
-		Background = Color3.fromRGB(15, 15, 15),
-		Secondary = Color3.fromRGB(25, 25, 25),
+		Background = Color3.fromRGB(25, 25, 25),
+		Secondary = Color3.fromRGB(15, 15, 15),
 		Tertiary = Color3.fromRGB(35, 35, 35),
 		Accent = Color3.fromRGB(255, 255, 255),
 		Text = Color3.fromRGB(255, 255, 255),
