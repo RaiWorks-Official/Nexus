@@ -68,7 +68,7 @@ function Library:CreateWindow(config)
 	local currentTheme = Themes[theme] or Themes.Dark
 	
 	local ScreenGui = Instance.new("ScreenGui")
-	ScreenGui.Name = "ModernUILib"
+	ScreenGui.Name = "Nexus"
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.ResetOnSpawn = false
 	ScreenGui.Parent = game:GetService("CoreGui")
@@ -84,6 +84,41 @@ function Library:CreateWindow(config)
 	local MainCorner = Instance.new("UICorner")
 	MainCorner.CornerRadius = UDim.new(0, 6)
 	MainCorner.Parent = MainFrame
+
+	-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 10)
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 16
+CloseButton.Parent = MainFrame
+CloseButton.MouseButton1Click:Connect(function()
+	ScreenGui:Destroy()
+end)
+
+-- Minimize Button
+local MinButton = Instance.new("TextButton")
+MinButton.Size = UDim2.new(0, 30, 0, 30)
+MinButton.Position = UDim2.new(1, -70, 0, 10)
+MinButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+MinButton.Text = "_"
+MinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinButton.Font = Enum.Font.GothamBold
+MinButton.TextSize = 16
+MinButton.Parent = Window.ScreenGui.MainFrame
+
+local minimized = false
+MinButton.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	if minimized then
+		MainFrame.Size = UDim2.new(0, 650, 0, 55)
+	else
+		MainFrame.Size = UDim2.new(0, 650, 0, 450)
+	end
+end)
 	
 	Tween(MainFrame, {Size = UDim2.new(0, 650, 0, 450)}, 0.5, Enum.EasingStyle.Back)
 	
