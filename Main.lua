@@ -84,41 +84,6 @@ function Library:CreateWindow(config)
 	local MainCorner = Instance.new("UICorner")
 	MainCorner.CornerRadius = UDim.new(0, 6)
 	MainCorner.Parent = MainFrame
-
-	-- Close Button
-local CloseButton = Instance.new("TextButton")
-CloseButton.Size = UDim2.new(0, 30, 0, 30)
-CloseButton.Position = UDim2.new(1, -35, 0, 10)
-CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
-CloseButton.Text = "X"
-CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-CloseButton.Font = Enum.Font.GothamBold
-CloseButton.TextSize = 16
-CloseButton.Parent = MainFrame
-CloseButton.MouseButton1Click:Connect(function()
-	ScreenGui:Destroy()
-end)
-
--- Minimize Button
-local MinButton = Instance.new("TextButton")
-MinButton.Size = UDim2.new(0, 30, 0, 30)
-MinButton.Position = UDim2.new(1, -70, 0, 10)
-MinButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-MinButton.Text = "_"
-MinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-MinButton.Font = Enum.Font.GothamBold
-MinButton.TextSize = 16
-MinButton.Parent = MainFrame
-
-local minimized = false
-MinButton.MouseButton1Click:Connect(function()
-	minimized = not minimized
-	if minimized then
-		MainFrame.Size = UDim2.new(0, 650, 0, 55)
-	else
-		MainFrame.Size = UDim2.new(0, 650, 0, 450)
-	end
-end)
 	
 	Tween(MainFrame, {Size = UDim2.new(0, 650, 0, 450)}, 0.5, Enum.EasingStyle.Back)
 	
@@ -162,6 +127,65 @@ end)
 	Version.Parent = Header
 	
 	MakeDraggable(MainFrame, Header)
+
+	-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 10)
+CloseButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CloseButton.BackgroundTransparency = 1
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 16
+CloseButton.Parent = MainFrame
+
+CloseButton.MouseEnter:Connect(function()
+	Tween(CloseButton, {BackgroundTransparency = 0, BackgroundColor3 = Color3.fromRGB(255, 0, 0)}, 0.2)
+end)
+CloseButton.MouseLeave:Connect(function()
+	Tween(CloseButton, {BackgroundTransparency = 1}, 0.2)
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+	Tween(CloseButton, {BackgroundColor3 = Color3.fromRGB(200, 0, 0)}, 0.15)
+	task.wait(0.15)
+	ScreenGui:Destroy()
+end)
+
+-- Minimize Button
+local MinButton = Instance.new("TextButton")
+MinButton.Size = UDim2.new(0, 30, 0, 30)
+MinButton.Position = UDim2.new(1, -70, 0, 10)
+MinButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MinButton.BackgroundTransparency = 1
+MinButton.Text = "_"
+MinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinButton.Font = Enum.Font.GothamBold
+MinButton.TextSize = 16
+MinButton.Parent = MainFrame
+
+local minimized = false
+
+MinButton.MouseEnter:Connect(function()
+	Tween(MinButton, {BackgroundTransparency = 0, BackgroundColor3 = Color3.fromRGB(120, 120, 120)}, 0.2)
+end)
+MinButton.MouseLeave:Connect(function()
+	if not minimized then
+		Tween(MinButton, {BackgroundTransparency = 1}, 0.2)
+	end
+end)
+
+MinButton.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	if minimized then
+		Tween(MinButton, {BackgroundTransparency = 0, BackgroundColor3 = Color3.fromRGB(160, 160, 160)}, 0.15)
+		Tween(MainFrame, {Size = UDim2.new(0, 650, 0, 55)}, 0.3, Enum.EasingStyle.Back)
+	else
+		Tween(MinButton, {BackgroundTransparency = 1}, 0.15)
+		Tween(MainFrame, {Size = UDim2.new(0, 650, 0, 450)}, 0.3, Enum.EasingStyle.Back)
+	end
+end)
 	
 	local TabContainer = Instance.new("Frame")
 	TabContainer.Size = UDim2.new(0, 160, 1, -55)
